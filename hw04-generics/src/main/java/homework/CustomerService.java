@@ -23,23 +23,7 @@ public class CustomerService {
                 .min(Comparator.comparingLong(o -> (o.getKey().getScores())))
                 .orElse(null);
         Customer customerCopy = new Customer(smallest.getKey().getId(), smallest.getKey().getName(), smallest.getKey().getScores());
-        String valCopy = smallest.getValue();
-        return new Map.Entry<Customer, String>() {
-            @Override
-            public Customer getKey() {
-                return customerCopy;
-            }
-
-            @Override
-            public String getValue() {
-                return valCopy;
-            }
-
-            @Override
-            public String setValue(String value) {
-                return null;
-            }
-        };
+        return new SimpleMapEntry(customerCopy, smallest.getValue());
     }
 
     public Map.Entry<Customer, String> getNext(Customer customer) {
@@ -51,5 +35,30 @@ public class CustomerService {
 
     public void add(Customer customer, String data) {
         map.put(customer, data);
+    }
+}
+
+class SimpleMapEntry implements Map.Entry<Customer, String> {
+    private Customer customer;
+    private String value;
+
+    public SimpleMapEntry(Customer customer, String value) {
+        this.customer = customer;
+        this.value = value;
+    }
+
+    @Override
+    public Customer getKey() {
+        return customer;
+    }
+
+    @Override
+    public String getValue() {
+        return value;
+    }
+
+    @Override
+    public String setValue(String value) {
+        return value;
     }
 }
