@@ -59,6 +59,8 @@ class SimpleMapEntry implements Map.Entry<Customer, String> {
 
     @Override
     public String setValue(String value) {
+        this.value = value;
         return value;
     }
+
 }
