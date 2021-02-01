@@ -1,13 +1,10 @@
 package homework;
 
 
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class CustomerService {
     private Map<Customer, String> map = new HashMap<>();
-
 
     //todo: 3. надо реализовать методы этого класса
     //важно подобрать подходящую Map-у, посмотрите на редко используемые методы, они тут полезны
@@ -22,8 +19,10 @@ public class CustomerService {
         Map.Entry<Customer, String> smallest = map.entrySet().stream()
                 .min(Comparator.comparingLong(o -> (o.getKey().getScores())))
                 .orElse(null);
+        System.out.println(map);
         Customer customerCopy = new Customer(smallest.getKey().getId(), smallest.getKey().getName(), smallest.getKey().getScores());
         return new SimpleMapEntry(customerCopy, smallest.getValue());
+//        return smallest;
     }
 
     public Map.Entry<Customer, String> getNext(Customer customer) {
