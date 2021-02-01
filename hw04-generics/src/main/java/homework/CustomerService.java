@@ -22,7 +22,6 @@ public class CustomerService {
         System.out.println(map);
         Customer customerCopy = new Customer(smallest.getKey().getId(), smallest.getKey().getName(), smallest.getKey().getScores());
         return new SimpleMapEntry(customerCopy, smallest.getValue());
-//        return smallest;
     }
 
     public Map.Entry<Customer, String> getNext(Customer customer) {
